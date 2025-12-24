@@ -4,6 +4,7 @@ const app = express();
 const auth = require("./routes/auth");
 const product = require("./routes/product");
 const products = require("./routes/products");
+require("dotenv").config();
 
 // middle ware
 app.use(express.json());
@@ -15,9 +16,7 @@ app.use("/api/product", product);
 app.use("/api/products", products);
 
 mongoose
-  .connect(
-    "mongodb+srv://joshuaije3_db_user:OlLe3yuC5WkO3HHA@cluster0.gqrutwr.mongodb.net/?appName=Cluster0"
-  )
+  .connect(process.env.MONGO_KEY)
   .then(() => {
     console.log("Connected to database!");
     app.listen(5000, () => {
